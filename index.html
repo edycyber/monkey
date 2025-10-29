@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventures of the Monkey</title>
+    <meta name="description" content="AI-powered animated series: Follow Monkey on epic jungle quests. New episodes weekly.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* === RESET & BASE === */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(20, 80, 60, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(10, 40, 30, 0.2) 0%, transparent 50%);
+        }
+
+        /* === HEADER === */
+        header {
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(10, 30, 25, 0.7), rgba(5, 15, 10, 0.9));
+            z-index: 1;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 5.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00ff9d, #00c4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+        p.subtitle {
+            font-size: 1.35rem;
+            max-width: 800px;
+            margin: 0 auto 36px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* === CTA BUTTON === */
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #00ff9d, #00c4ff);
+            color: #000;
+            padding: 16px 44px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.25rem;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0, 255, 157, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.6s;
+        }
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 255, 157, 0.5);
+        }
+
+        /* === GALLERY === */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            padding: 80px 40px;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 255, 157, 0.2);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: #fff;
+            padding: 30px 20px 20px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+        .overlay h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* === FOOTER === */
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            background: #111;
+            font-size: 0.95rem;
+            color: #888;
+            border-top: 1px solid #222;
+        }
+        footer a {
+            color: #00ff9d;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .header-content > * {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .gallery-item {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+        .gallery-item:nth-child(8) { animation-delay: 0.8s; }
+        .gallery-item:nth-child(9) { animation-delay: 0.9s; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 992px) {
+            h1 { font-size: 4rem; }
+            .gallery { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); padding: 60px 30px; }
+        }
+        @media (max-width: 768px) {
+            header { padding: 100px 20px 60px; }
+            h1 { font-size: 3.2rem; }
+            p.subtitle { font-size: 1.15rem; }
+            .cta-btn { padding: 14px 36px; font-size: 1.1rem; }
+            .gallery { grid-template-columns: 1fr 1fr; gap: 18px; padding: 50px 20px; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2.6rem; }
+            .gallery { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>Adventures of the Monkey</h1>
+            <p class="subtitle">An AI-powered animated saga. Swing into the jungle with Monkey as he battles predators, uncovers ancient secrets, and finds legendary treasures.</p>
+            <a href="#subscribe" class="cta-btn">Subscribe Now</a>
+        </div>
+    </header>
+
+    <section class="gallery">
+        <div class="gallery-item">
+            <img src="m1.png" alt="Monkey swinging through vines">
+            <div class="overlay"><h3>Swinging High</h3></div>
+        </div>
+        <div class="gallery-item">
+            <img src="m2.png" alt="Monkey exploring ancient ruins">
+            <div class="overlay"><h3>Lost Temple</h3></div>
+        </div>
+        <div class="gallery-item">
+            <img src="m3.png" alt="Monkey escaping a waterfall">
+            <div class="overlay"><h3>Waterfall Escape</h3></div>
+        </div>
+        <div class="gallery-item">
+            <img src="m4.png" alt="Monkey with jungle friends">
+            <div class="overlay"><h3>Jungle Allies</h3></div>
+        </div>
+        <div class="gallery-item">
+            <img src="m5.png" alt="Monkey finds golden banana">
+            <div class="overlay"><h3>Golden Prize</h3></div>
+        </div>
+        <div class="gallery-item">
+            <img src="m6.png" alt="Monkey on leaf boat">
+            <div class="overlay"><h3>River Quest</h3></div>
+        </div>
+        <div class="gallery-item">
+            <img src="m7.png" alt="Monkey dodging traps">
+            <div class="overlay"><h3>Trap Maze</h3></div>
+        </div>
+        <div class="gallery-item">
+            <img src="m8.png" alt="Monkey at sunset cliff">
+            <div class="overlay"><h3>Sunset View</h3></div>
+        </div>
+        <div class="gallery-item">
+            <img src="m9.png" alt="Monkey celebrating victory">
+            <div class="overlay"><h3>Victory Dance</h3></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 <strong>Adventures of the Monkey</strong>. All rights reserved. <br>Powered by <a href="https://x.ai" target="_blank">xAI</a> &amp; cutting-edge animation.</p>
+    </footer>
+
+</body>
+</html>
